@@ -1,0 +1,231 @@
+C51 COMPILER V9.52.0.0   HONGNGOAI                                                         10/08/2020 11:39:23 PAGE 1   
+
+
+C51 COMPILER V9.52.0.0, COMPILATION OF MODULE HONGNGOAI
+OBJECT MODULE PLACED IN hongngoai.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE hongngoai.c BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include <REGX51.H>
+   2          
+   3          #define led P1_1
+   4          #define led7seg1 P2_7
+   5          #define led7seg2 P2_6
+   6          #define led7seg3 P2_5
+   7          #define led7seg4 P2_4
+   8          #define btn1 P3_7
+   9          #define btn2 P2_0
+  10          #define btn3 P2_1
+  11          #define buzz P3_6
+  12          
+  13          unsigned int vruiGlbCountCom = 0, vruiGlbCountSecond = 0;
+  14          unsigned char led7segNumber[10]={0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xf8,0x80,0x90};
+  15          unsigned char led7segDisplay[4];
+  16          char vrucGlbLed = 0, vrcGlbHour = 0, vrcGlbMinute = 0, vrcGlbSecond = 0, vrcGlbMode = 0;
+  17          
+  18          void fnDelayms(unsigned vruiTime)
+  19          {
+  20   1        while (vruiTime--);
+  21   1      }
+  22          
+  23          void fnTimer0Isr() interrupt 1
+  24          {
+  25   1        TH0 = 0xfc;
+  26   1        TL0 = 0x18;
+  27   1        TR0 = 1;
+  28   1        
+  29   1        vruiGlbCountCom++;
+  30   1        vruiGlbCountSecond++;
+  31   1        led7seg1 = led7seg2 = led7seg3 = led7seg4 = 1;
+  32   1        if (vruiGlbCountCom >= 500)
+  33   1        {
+  34   2          led =~led;
+  35   2          vruiGlbCountCom = 0;
+  36   2        }
+  37   1        if (vruiGlbCountSecond >= 1000)
+  38   1        {
+  39   2          vrcGlbSecond++;
+  40   2          vruiGlbCountSecond = 0;
+  41   2        }
+  42   1        if (vrcGlbSecond > 59)
+  43   1        {
+  44   2          vrcGlbSecond = 0;
+  45   2          vrcGlbMinute++;
+  46   2        }
+  47   1        if (vrcGlbMinute > 59)
+  48   1        {
+  49   2          vrcGlbMinute = 0;
+  50   2          vrcGlbHour++;
+  51   2        }
+  52   1        if (vrcGlbHour > 23)
+  53   1        {
+  54   2          vrcGlbHour = 0;
+  55   2        }
+C51 COMPILER V9.52.0.0   HONGNGOAI                                                         10/08/2020 11:39:23 PAGE 2   
+
+  56   1        if (vrucGlbLed == 0)
+  57   1        {
+  58   2          P0 = led7segDisplay[0];
+  59   2          led7seg1 = 0;
+  60   2        }
+  61   1        else if (vrucGlbLed == 1)
+  62   1        {
+  63   2          P0 = led7segDisplay[1];
+  64   2          led7seg2 = 0;
+  65   2        }
+  66   1        else if (vrucGlbLed == 2)
+  67   1        {
+  68   2          P0 = led7segDisplay[2];
+  69   2          led7seg3 = 0;
+  70   2        }
+  71   1        else if (vrucGlbLed == 3)
+  72   1        {
+  73   2          P0 = led7segDisplay[3];
+  74   2          led7seg4 = 0;
+  75   2        }
+  76   1        vrucGlbLed++;
+  77   1        if (vrucGlbLed > 3)
+  78   1        {
+  79   2          vrucGlbLed = 0;
+  80   2        }
+  81   1      }
+  82          
+  83          void fnTimer1Isr() interrupt 3
+  84          {
+  85   1        TH1 = 0xfc;
+  86   1        TL1 = 0x18;
+  87   1        TR1 = 1;
+  88   1      }
+  89          
+  90          void fnSetup()
+  91          {
+  92   1        TMOD = 0x11;
+  93   1        ET1 = 1;
+  94   1        TR1 = 1;
+  95   1        ET0 = 1;
+  96   1        TR0 = 1;
+  97   1        EA = 1;
+  98   1      }
+  99          
+ 100          void main()
+ 101          {
+ 102   1        unsigned char vrucCountBtn1 = 0, vrucCountBtn2 = 0, vrucCountBtn3 = 0;
+ 103   1        bit vrbBtn1Flag = 0, vrbBtn2Flag = 0, vrbBtn3Flag = 0;
+ 104   1        fnSetup();
+ 105   1        while(1)
+ 106   1        {
+ 107   2          if (btn1 == 0)
+ 108   2          {
+ 109   3            fnDelayms(10000);
+ 110   3            if (btn1 == 0)
+ 111   3            {
+ 112   4              vrucCountBtn1++;
+ 113   4              if ((vrucCountBtn1 >= 30) && (vrbBtn1Flag == 0))
+ 114   4              {
+ 115   5                buzz = 0;
+ 116   5                fnDelayms(5000);
+ 117   5                buzz = 1;
+C51 COMPILER V9.52.0.0   HONGNGOAI                                                         10/08/2020 11:39:23 PAGE 3   
+
+ 118   5                vrcGlbMode = 1;
+ 119   5                vrbBtn1Flag = 1;
+ 120   5              }
+ 121   4            }
+ 122   3          }
+ 123   2          else
+ 124   2          {
+ 125   3            if ((vrucCountBtn1 != 0) && (vrucCountBtn1 < 30))
+ 126   3            {
+ 127   4              if (vrcGlbMode == 1)
+ 128   4              {
+ 129   5                vrcGlbMode = 2;
+ 130   5              }
+ 131   4              else if (vrcGlbMode == 2)
+ 132   4              {
+ 133   5                vrcGlbMode = 0;
+ 134   5              }
+ 135   4            }
+ 136   3            vrbBtn1Flag = 0;
+ 137   3            vrucCountBtn1 = 0;
+ 138   3          }
+ 139   2          
+ 140   2          if (btn2 == 0)
+ 141   2          {
+ 142   3            fnDelayms(10000);
+ 143   3            if (btn2 == 0)
+ 144   3            {
+ 145   4              vrucCountBtn2++;
+ 146   4              if ((vrucCountBtn2 >= 30) && (vrbBtn2Flag == 0))
+ 147   4              {
+ 148   5                vrbBtn2Flag = 1;
+ 149   5              }
+ 150   4            }
+ 151   3          }
+ 152   2          else
+ 153   2          {
+ 154   3            if ((vrucCountBtn2 != 0) && (vrucCountBtn2 < 30))
+ 155   3            {
+ 156   4              if (vrcGlbMode == 1)
+ 157   4              {
+ 158   5                vrcGlbHour++;
+ 159   5              }
+ 160   4              else if (vrcGlbMode == 2)
+ 161   4              {
+ 162   5                vrcGlbMinute++;
+ 163   5              }
+ 164   4            }
+ 165   3            vrbBtn2Flag = 0;
+ 166   3            vrucCountBtn2 = 0;
+ 167   3          }
+ 168   2          
+ 169   2          if (btn3 == 0)
+ 170   2          {
+ 171   3            fnDelayms(10000);
+ 172   3            if (btn3 == 0)
+ 173   3            {
+ 174   4              vrucCountBtn3++;
+ 175   4              if ((vrucCountBtn3 >= 30) && (vrbBtn3Flag == 0))
+ 176   4              {
+ 177   5                vrbBtn3Flag = 1;
+ 178   5              }
+ 179   4            }
+C51 COMPILER V9.52.0.0   HONGNGOAI                                                         10/08/2020 11:39:23 PAGE 4   
+
+ 180   3          }
+ 181   2          else
+ 182   2          {
+ 183   3            if ((vrucCountBtn3 != 0) && (vrucCountBtn3 < 30))
+ 184   3            {
+ 185   4              if (vrcGlbMode == 1)
+ 186   4              {
+ 187   5                vrcGlbHour--;
+ 188   5              }
+ 189   4              else if (vrcGlbMode == 2)
+ 190   4              {
+ 191   5                vrcGlbMinute--;
+ 192   5              }
+ 193   4            }
+ 194   3            vrbBtn3Flag = 0;
+ 195   3            vrucCountBtn3 = 0;
+ 196   3          }
+ 197   2          led7segDisplay[0] = led7segNumber[vrcGlbHour/10];
+ 198   2          led7segDisplay[1] = led7segNumber[vrcGlbHour%10];
+ 199   2          led7segDisplay[2] = led7segNumber[vrcGlbMinute/10];
+ 200   2          led7segDisplay[3] = led7segNumber[vrcGlbMinute%10];
+ 201   2        }
+ 202   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    463    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     23    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----       3
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

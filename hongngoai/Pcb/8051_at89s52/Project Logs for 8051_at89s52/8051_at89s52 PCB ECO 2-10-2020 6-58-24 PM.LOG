@@ -1,0 +1,25 @@
+Removed Pin From Net: NetName=LED1_MCU Pin=IC1-22
+Removed Pin From Net: NetName=LED2_MCU Pin=IC1-23
+Removed Pin From Net: NetName=LED3_MCU Pin=IC1-24
+Removed Pin From Net: NetName=SDA Pin=IC1-26
+Removed Pin From Net: NetName=SCL Pin=IC1-27
+Change component parameters: Designator = "C1"; Footprint = "CAP_0805"; UniqueID = "\NHYRGDJC"
+Change component parameters. Clean all parameters for all variants
+Change component parameters (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "PackageReference"; Value = "C1206"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "104"; VariantName = "[No Variations]"
+Change component parameters (AddParameter ignored because duplicated): Name = "VALUE"; Value = "CN?"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=LED3_MCU Pin=IC1-26
+Added Pin To Net: NetName=LED2_MCU Pin=IC1-27
+Added Pin To Net: NetName=LED1_MCU Pin=IC1-28
+Added Member To Class: ClassName=8051_at89s52 Member=Component R10 1k
+Added Member To Class: ClassName=8051_at89s52 Member=Component R11 10k
+Added Member To Class: ClassName=8051_at89s52 Member=Component R12 1k
+Added Member To Class: ClassName=8051_at89s52 Member=Component R13 10k
+Added Member To Class: ClassName=8051_at89s52 Member=Component R14 1k
+Added Member To Class: ClassName=8051_at89s52 Member=Component R15 10k
+Added Member To Class: ClassName=8051_at89s52 Member=Component R16 1k
+Added Member To Class: ClassName=8051_at89s52 Member=Component R17 10k
+Added Room: Name=8051_at89s52

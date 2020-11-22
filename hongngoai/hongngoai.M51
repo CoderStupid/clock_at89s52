@@ -1,0 +1,323 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        10/08/2020  11:39:23  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE hongngoai.obj TO hongngoai RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  hongngoai.obj (HONGNGOAI)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?SCDIV)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  hongngoai (HONGNGOAI)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0017H     UNIT         ?DT?HONGNGOAI
+                    001FH     0001H                  *** GAP ***
+            BIT     0020H.0   0000H.3   UNIT         _BIT_GROUP_
+                    0020H.3   0000H.5                *** GAP ***
+            IDATA   0021H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     0008H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+            CODE    000EH     0009H     UNIT         ?PR?FNTIMER1ISR?HONGNGOAI
+                    0017H     0004H                  *** GAP ***
+            CODE    001BH     0003H     ABSOLUTE     
+            CODE    001EH     00F7H     UNIT         ?PR?MAIN?HONGNGOAI
+            CODE    0115H     00B2H     UNIT         ?PR?FNTIMER0ISR?HONGNGOAI
+            CODE    01C7H     008CH     UNIT         ?C_C51STARTUP
+            CODE    0253H     0024H     UNIT         ?C_INITSEG
+            CODE    0277H     0022H     UNIT         ?C?LIB_CODE
+            CODE    0299H     000FH     UNIT         ?PR?_FNDELAYMS?HONGNGOAI
+            CODE    02A8H     000EH     UNIT         ?PR?FNSETUP?HONGNGOAI
+
+
+
+OVERLAY MAP OF MODULE:   hongngoai (HONGNGOAI)
+
+
+SEGMENT                              BIT_GROUP 
+  +--> CALLED SEGMENT             START    LENGTH
+-------------------------------------------------
+?C_C51STARTUP                     -----    -----
+  +--> ?PR?MAIN?HONGNGOAI
+  +--> ?C_INITSEG
+
+?PR?MAIN?HONGNGOAI                0020H.0  0000H.3
+  +--> ?PR?FNSETUP?HONGNGOAI
+  +--> ?PR?_FNDELAYMS?HONGNGOAI
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/08/2020  11:39:23  PAGE 2
+
+
+
+
+
+SYMBOL TABLE OF MODULE:  hongngoai (HONGNGOAI)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        HONGNGOAI
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0008H         PUBLIC        vrcGlbHour
+  B:00A8H.7       PUBLIC        EA
+  D:0009H         PUBLIC        led7segDisplay
+  D:000DH         PUBLIC        vruiGlbCountCom
+  B:00A0H.0       PUBLIC        P2_0
+  B:0090H.1       PUBLIC        P1_1
+  B:00A0H.1       PUBLIC        P2_1
+  B:00A0H.4       PUBLIC        P2_4
+  B:00A0H.5       PUBLIC        P2_5
+  B:00A0H.6       PUBLIC        P2_6
+  B:00B0H.6       PUBLIC        P3_6
+  B:00A0H.7       PUBLIC        P2_7
+  B:00B0H.7       PUBLIC        P3_7
+  D:000FH         PUBLIC        led7segNumber
+  C:001EH         PUBLIC        main
+  C:029DH         PUBLIC        _fnDelayms
+  D:0089H         PUBLIC        TMOD
+  C:0115H         PUBLIC        fnTimer0Isr
+  C:000EH         PUBLIC        fnTimer1Isr
+  D:0019H         PUBLIC        vrcGlbSecond
+  B:00A8H.1       PUBLIC        ET0
+  B:00A8H.3       PUBLIC        ET1
+  D:008CH         PUBLIC        TH0
+  D:001AH         PUBLIC        vruiGlbCountSecond
+  D:008DH         PUBLIC        TH1
+  D:008AH         PUBLIC        TL0
+  D:008BH         PUBLIC        TL1
+  B:0088H.4       PUBLIC        TR0
+  B:0088H.6       PUBLIC        TR1
+  D:001CH         PUBLIC        vrcGlbMinute
+  C:02A8H         PUBLIC        fnSetup
+  D:001DH         PUBLIC        vrcGlbMode
+  D:001EH         PUBLIC        vrucGlbLed
+  C:0299H         SYMBOL        L?0051
+  -------         PROC          L?0050
+  -------         ENDPROC       L?0050
+  C:0299H         SYMBOL        L?0051
+  -------         PROC          _FNDELAYMS
+  D:0006H         SYMBOL        vruiTime
+  C:029DH         LINE#         18
+  C:029DH         LINE#         19
+  C:029DH         LINE#         20
+  C:02A7H         LINE#         21
+  -------         ENDPROC       _FNDELAYMS
+  -------         PROC          FNTIMER0ISR
+  C:0115H         LINE#         23
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/08/2020  11:39:23  PAGE 3
+
+
+  C:0119H         LINE#         25
+  C:011CH         LINE#         26
+  C:011FH         LINE#         27
+  C:0121H         LINE#         29
+  C:0129H         LINE#         30
+  C:0131H         LINE#         31
+  C:0139H         LINE#         32
+  C:0144H         LINE#         33
+  C:0144H         LINE#         34
+  C:0146H         LINE#         35
+  C:014CH         LINE#         36
+  C:014CH         LINE#         37
+  C:0157H         LINE#         38
+  C:0157H         LINE#         39
+  C:0159H         LINE#         40
+  C:015FH         LINE#         41
+  C:015FH         LINE#         42
+  C:0168H         LINE#         43
+  C:0168H         LINE#         44
+  C:016BH         LINE#         45
+  C:016DH         LINE#         46
+  C:016DH         LINE#         47
+  C:0176H         LINE#         48
+  C:0176H         LINE#         49
+  C:0179H         LINE#         50
+  C:017BH         LINE#         51
+  C:017BH         LINE#         52
+  C:0184H         LINE#         53
+  C:0184H         LINE#         54
+  C:0187H         LINE#         55
+  C:0187H         LINE#         56
+  C:018BH         LINE#         57
+  C:018BH         LINE#         58
+  C:018EH         LINE#         59
+  C:0190H         LINE#         60
+  C:0192H         LINE#         61
+  C:0197H         LINE#         62
+  C:0197H         LINE#         63
+  C:019AH         LINE#         64
+  C:019CH         LINE#         65
+  C:019EH         LINE#         66
+  C:01A3H         LINE#         67
+  C:01A3H         LINE#         68
+  C:01A6H         LINE#         69
+  C:01A8H         LINE#         70
+  C:01AAH         LINE#         71
+  C:01AFH         LINE#         72
+  C:01AFH         LINE#         73
+  C:01B2H         LINE#         74
+  C:01B4H         LINE#         75
+  C:01B4H         LINE#         76
+  C:01B6H         LINE#         77
+  C:01BFH         LINE#         78
+  C:01BFH         LINE#         79
+  C:01C2H         LINE#         80
+  C:01C2H         LINE#         81
+  -------         ENDPROC       FNTIMER0ISR
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/08/2020  11:39:23  PAGE 4
+
+
+  -------         PROC          FNTIMER1ISR
+  C:000EH         LINE#         83
+  C:000EH         LINE#         85
+  C:0011H         LINE#         86
+  C:0014H         LINE#         87
+  C:0016H         LINE#         88
+  -------         ENDPROC       FNTIMER1ISR
+  -------         PROC          FNSETUP
+  C:02A8H         LINE#         90
+  C:02A8H         LINE#         91
+  C:02A8H         LINE#         92
+  C:02ABH         LINE#         93
+  C:02ADH         LINE#         94
+  C:02AFH         LINE#         95
+  C:02B1H         LINE#         96
+  C:02B3H         LINE#         97
+  C:02B5H         LINE#         98
+  -------         ENDPROC       FNSETUP
+  -------         PROC          MAIN
+  -------         DO            
+  D:0005H         SYMBOL        vrucCountBtn1
+  D:0003H         SYMBOL        vrucCountBtn2
+  D:0002H         SYMBOL        vrucCountBtn3
+  B:0020H.0       SYMBOL        vrbBtn1Flag
+  B:0020H.1       SYMBOL        vrbBtn2Flag
+  B:0020H.2       SYMBOL        vrbBtn3Flag
+  -------         ENDDO         
+  C:001EH         LINE#         100
+  C:001EH         LINE#         101
+  C:001EH         LINE#         102
+  C:0022H         LINE#         103
+  C:0028H         LINE#         104
+  C:002BH         LINE#         105
+  C:002BH         LINE#         106
+  C:002BH         LINE#         107
+  C:002EH         LINE#         108
+  C:002EH         LINE#         109
+  C:0031H         LINE#         110
+  C:0034H         LINE#         111
+  C:0034H         LINE#         112
+  C:0035H         LINE#         113
+  C:003EH         LINE#         114
+  C:003EH         LINE#         115
+  C:0040H         LINE#         116
+  C:0047H         LINE#         117
+  C:0049H         LINE#         118
+  C:004CH         LINE#         119
+  C:004EH         LINE#         120
+  C:004EH         LINE#         121
+  C:004EH         LINE#         122
+  C:0050H         LINE#         124
+  C:0050H         LINE#         125
+  C:0058H         LINE#         126
+  C:0058H         LINE#         127
+  C:005DH         LINE#         128
+  C:005DH         LINE#         129
+  C:0060H         LINE#         130
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/08/2020  11:39:23  PAGE 5
+
+
+  C:0062H         LINE#         131
+  C:0067H         LINE#         132
+  C:0067H         LINE#         133
+  C:006AH         LINE#         134
+  C:006AH         LINE#         135
+  C:006AH         LINE#         136
+  C:006CH         LINE#         137
+  C:006EH         LINE#         138
+  C:006EH         LINE#         140
+  C:0071H         LINE#         141
+  C:0071H         LINE#         142
+  C:0074H         LINE#         143
+  C:0077H         LINE#         144
+  C:0077H         LINE#         145
+  C:0078H         LINE#         146
+  C:0081H         LINE#         147
+  C:0081H         LINE#         148
+  C:0083H         LINE#         149
+  C:0083H         LINE#         150
+  C:0083H         LINE#         151
+  C:0085H         LINE#         153
+  C:0085H         LINE#         154
+  C:008DH         LINE#         155
+  C:008DH         LINE#         156
+  C:0092H         LINE#         157
+  C:0092H         LINE#         158
+  C:0094H         LINE#         159
+  C:0096H         LINE#         160
+  C:009BH         LINE#         161
+  C:009BH         LINE#         162
+  C:009DH         LINE#         163
+  C:009DH         LINE#         164
+  C:009DH         LINE#         165
+  C:009FH         LINE#         166
+  C:00A1H         LINE#         167
+  C:00A1H         LINE#         169
+  C:00A4H         LINE#         170
+  C:00A4H         LINE#         171
+  C:00A7H         LINE#         172
+  C:00AAH         LINE#         173
+  C:00AAH         LINE#         174
+  C:00ABH         LINE#         175
+  C:00B4H         LINE#         176
+  C:00B4H         LINE#         177
+  C:00B6H         LINE#         178
+  C:00B6H         LINE#         179
+  C:00B6H         LINE#         180
+  C:00B8H         LINE#         182
+  C:00B8H         LINE#         183
+  C:00C0H         LINE#         184
+  C:00C0H         LINE#         185
+  C:00C5H         LINE#         186
+  C:00C5H         LINE#         187
+  C:00C7H         LINE#         188
+  C:00C9H         LINE#         189
+  C:00CEH         LINE#         190
+  C:00CEH         LINE#         191
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/08/2020  11:39:23  PAGE 6
+
+
+  C:00D0H         LINE#         192
+  C:00D0H         LINE#         193
+  C:00D0H         LINE#         194
+  C:00D2H         LINE#         195
+  C:00D4H         LINE#         196
+  C:00D4H         LINE#         197
+  C:00E2H         LINE#         198
+  C:00F3H         LINE#         199
+  C:0101H         LINE#         200
+  C:0112H         LINE#         201
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        HONGNGOAI
+
+  -------         MODULE        ?C?SCDIV
+  C:0277H         PUBLIC        ?C?SCDIV
+  -------         ENDMOD        ?C?SCDIV
+
+Program Size: data=32.3 xdata=0 code=682
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
